@@ -38,11 +38,12 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
             <input
               id={f.label}
               type="text"
+              className={errors[f.label] ? "is-error" : ""}
               placeholder={f.placeholder}
               value={values[f.label] || ""}
               onChange={(e) => set(f.label, e.target.value)}
             />
-            {errors[f.label] ? <div className="form-error">{errors[f.label]}</div> : null}
+            <div className="form-error">{errors[f.label] || ""}</div>
           </div>
         ))}
         <div className="field">
@@ -50,11 +51,12 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
           <input
             id="kontak"
             type="text"
+            className={errors.kontak ? "is-error" : ""}
             placeholder="Budi, 0812 3456 7890"
             value={values.kontak || ""}
             onChange={(e) => set("kontak", e.target.value)}
           />
-          {errors.kontak ? <div className="form-error">{errors.kontak}</div> : null}
+          <div className="form-error">{errors.kontak || ""}</div>
         </div>
       </div>
 
@@ -67,7 +69,8 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
 
       {sent ? (
         <p className="form-status" style={{ color: "var(--accent-dark)" }}>
-          Ringkasan permintaan sudah disiapkan di WhatsApp. Jika jendela tidak terbuka, silakan izinkan popup lalu coba lagi.
+          Ringkasan permintaan sudah disiapkan di WhatsApp. Kalau jendelanya tidak terbuka, izinkan popup lalu coba
+          lagi.
         </p>
       ) : null}
     </div>

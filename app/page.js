@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Header, Footer, waLink } from "../components/Chrome";
-import { images, stats, verticalList } from "../lib/content";
+import { clients, images, partners, stats, verticalList } from "../lib/content";
 
 export default function Home() {
   return (
@@ -14,18 +14,19 @@ export default function Home() {
         <section className="hero">
           <div className="hero-media">
             <img src={images.hero.src} alt={images.hero.alt} />
+            <img src="/gip-mark.jpg" alt="" className="hero-motif" />
           </div>
           <div className="wrap">
             <div className="hero-content">
               <p className="eyebrow hero-eyebrow">PT Galactic Indonesia Perkasa</p>
-              <h1>Infrastruktur yang terpasang, menyala, dan bertahan di lokasi yang sulit</h1>
+              <h1>Kami pasang, jalankan, dan jaga infrastruktur teknis di lapangan</h1>
               <p>
-                Panggung yang harus hidup jam delapan pagi dan kapal yang tidak boleh kehilangan koneksi punya
-                masalah yang sama. Kami menyelesaikannya.
+                Event production, jaringan kantor multi cabang, dan konektivitas maritim. Tiga lini, satu tim
+                lapangan yang sama.
               </p>
               <div className="hero-actions">
                 <a className="btn btn-solid" href="#lini">
-                  Lihat layanan
+                  Lihat tiga lini
                 </a>
                 <Link className="btn btn-ghost-light" href="/tentang-kami">
                   Tentang GIP
@@ -38,7 +39,7 @@ export default function Home() {
         <section className="section" id="lini">
           <div className="wrap">
             <p className="eyebrow">Tiga lini layanan</p>
-            <h2>Pilih yang sesuai kebutuhan Anda</h2>
+            <h2>Mulai dari yang paling dekat dengan kebutuhan Anda</h2>
             <div className="grid grid-3" style={{ marginTop: 34 }}>
               {verticalList.map((v) => (
                 <Link
@@ -66,32 +67,25 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section section-alt">
+        <section className="section-proof">
           <div className="wrap">
-            <p className="eyebrow">Rekam jejak gabungan</p>
-            <div className="grid grid-4" style={{ marginTop: 8 }}>
-              {stats.map((s) => (
-                <div className="stat" key={s.label} style={{ background: "var(--surface)" }}>
-                  <div className="stat-label">{s.label}</div>
-                  <div className="stat-value">{s.value}</div>
+            <div className="proof-grid">
+              <div>
+                <p className="eyebrow">Partner teknologi</p>
+                <div className="logo-row">
+                  {partners.map((p) => (
+                    <img className="logo-row-item" key={p.name} src={p.src} alt={p.name} />
+                  ))}
                 </div>
-              ))}
-            </div>
-            <p className="form-note" style={{ marginTop: 18 }}>
-              Angka bersifat contoh. Ganti dengan data operasional aktual sebelum situs diluncurkan.
-            </p>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="wrap">
-            <p className="eyebrow">Dipercaya oleh</p>
-            <div className="logos">
-              {["Klien 1", "Klien 2", "Klien 3", "Klien 4", "Klien 5"].map((l) => (
-                <div className="logo-slot" key={l}>
-                  {l}
+              </div>
+              <div>
+                <p className="eyebrow">Klien</p>
+                <div className="logo-row">
+                  {clients.map((c) => (
+                    <img className="logo-row-item is-client" key={c.name} src={c.src} alt={c.name} />
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -100,19 +94,18 @@ export default function Home() {
           <div className="wrap story">
             <div>
               <p className="eyebrow">Kenapa satu perusahaan</p>
-              <h2>Kompetensinya sama, alatnya saja yang berbeda</h2>
+              <h2>Alatnya berbeda, pekerjaannya sama</h2>
               <p className="lede" style={{ marginTop: 18 }}>
-                Event production dan konektivitas maritim terlihat seperti dua dunia. Pada praktiknya keduanya
-                menuntut hal yang identik: deployment cepat, uptime yang tidak bisa ditawar, tim yang hadir di
-                lokasi, dan tidak ada ruang untuk mengulang.
+                Panggung, kantor cabang, dan kapal menuntut hal yang sama dari kami: pasang cepat, jalan tanpa
+                putus, orangnya ada di lokasi, dan tidak ada kesempatan mengulang.
               </p>
               <p className="lede">
-                LED, sound, lighting, switch, dan terminal satelit hanyalah alat. Yang kami jual adalah kepastian
-                bahwa semuanya bekerja saat dibutuhkan.
+                LED, line array, switch, dan terminal satelit hanya alat kerja. Yang kami tanggung adalah semuanya
+                bekerja pada saat dipakai.
               </p>
               <div className="hero-actions">
                 <Link className="btn btn-outline" href="/tentang-kami">
-                  Tentang GIP
+                  Cara kami bekerja
                 </Link>
               </div>
             </div>
@@ -123,23 +116,44 @@ export default function Home() {
         </section>
 
         <section className="section">
-          <div className="wrap" style={{ textAlign: "center" }}>
-            <h2>Ada rencana yang perlu dibicarakan</h2>
-            <p className="lede" style={{ margin: "14px auto 28px" }}>
-              Dua jalur, sesuai jenis kebutuhan Anda.
+          <div className="wrap">
+            <p className="eyebrow" style={{ marginBottom: 20 }}>
+              Rekam jejak gabungan
             </p>
-            <div className="hero-actions" style={{ justifyContent: "center" }}>
-              <a
-                className="btn btn-solid"
-                href={waLink("Halo GIP, saya ingin menanyakan kebutuhan event.")}
-                target="_blank"
-                rel="noopener"
-              >
-                Chat WhatsApp untuk event
-              </a>
-              <Link className="btn btn-outline" href="/marine#form">
-                Ajukan proposal konektivitas
-              </Link>
+            <div className="grid grid-4">
+              {stats.map((s) => (
+                <div className="stat" key={s.label}>
+                  <div className="stat-label">{s.label}</div>
+                  <div className="stat-value">{s.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section" style={{ paddingTop: 0 }}>
+          <div className="wrap">
+            <div className="cta-panel">
+              <div>
+                <h2>Ada rencana yang perlu dibicarakan</h2>
+                <p>
+                  Kebutuhan event biasanya mendesak, jadi WhatsApp lebih cepat. Untuk jaringan dan maritim, kirim
+                  kerangka kebutuhannya lewat formulir.
+                </p>
+              </div>
+              <div className="hero-actions">
+                <a
+                  className="btn btn-solid"
+                  href={waLink("Halo GIP, saya ingin menanyakan kebutuhan event.")}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Chat WhatsApp
+                </a>
+                <Link className="btn btn-outline" href="/marine#form">
+                  Ajukan proposal konektivitas
+                </Link>
+              </div>
             </div>
           </div>
         </section>

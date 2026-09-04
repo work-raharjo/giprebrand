@@ -1,6 +1,6 @@
 # Kredit gambar
 
-Seluruh foto berasal dari Unsplash dan digunakan sebagai penampung sementara.
+Foto pada situs ini berasal dari Unsplash dan digunakan sebagai penampung sementara.
 Unsplash License mengizinkan penggunaan komersial tanpa biaya, dan mencantumkan
 kredit fotografer merupakan praktik yang dianjurkan.
 
@@ -16,3 +16,6 @@ kredit fotografer merupakan praktik yang dianjurkan.
 | Blok narasi homepage | Bennie Bates | https://unsplash.com/@bennieray |
 
 Ganti seluruhnya dengan dokumentasi proyek GIP sebelum peluncuran.
+
+Logo partner dan klien adalah milik masing-masing pemilik merek, dipakai untuk
+menunjukkan hubungan kerja yang ada.

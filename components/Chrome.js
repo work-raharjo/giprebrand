@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, verticalList } from "../lib/content";
+import { company, offices, verticalList } from "../lib/content";
 
 const PATHS = {
   wifi: "M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01",
@@ -42,6 +42,10 @@ export function Check() {
   );
 }
 
+export function LogoMark() {
+  return <img src="/gip-mark.jpg" alt="Logo GIP" className="logo-mark-img" width={30} height={30} />;
+}
+
 export function waLink(text) {
   return `https://wa.me/${company.waNumber}?text=${encodeURIComponent(text)}`;
 }
@@ -51,7 +55,7 @@ export function Header({ vertical }) {
     <header className="site-header">
       <div className="wrap header-inner">
         <Link href="/" className="logo">
-          <span className="logo-mark">GIP</span>
+          <LogoMark />
           <span>
             {company.domain}
             {vertical ? <span className="logo-sub"> / {vertical.slug}</span> : null}
@@ -93,11 +97,11 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <div className="logo" style={{ marginBottom: 12 }}>
-              <span className="logo-mark">GIP</span>
+              <LogoMark />
               <span>{company.domain}</span>
             </div>
             <p style={{ color: "var(--ink-soft)", maxWidth: "34ch" }}>
-              Infrastruktur yang terpasang, menyala, dan bertahan di lokasi yang sulit.
+              Pasang, jalankan, dan jaga infrastruktur teknis di lapangan.
             </p>
           </div>
 
@@ -130,14 +134,30 @@ export function Footer() {
           <div>
             <h4>Kontak</h4>
             <ul>
-              <li style={{ color: "var(--ink-soft)" }}>{company.address}</li>
+              <li>
+                <a href={`mailto:${company.email}`}>{company.email}</a>
+              </li>
               <li>
                 <a href={`tel:${company.phone}`}>{company.phone}</a>
               </li>
               <li>
-                <a href={`mailto:${company.email}`}>{company.email}</a>
+                <a href={waLink("Halo GIP, saya ingin berkonsultasi.")} target="_blank" rel="noopener">
+                  WhatsApp
+                </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div className="footer-offices">
+          <h4>Kantor</h4>
+          <div className="footer-offices-grid">
+            {offices.map((o) => (
+              <div key={o.city}>
+                <div className="office-city">{o.city}</div>
+                <p>{o.addr}</p>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -146,11 +166,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {company.name}. Seluruh hak dilindungi.
           </span>
           <span>
-            Foto sementara dari{" "}
-            <a href="https://unsplash.com" style={{ textDecoration: "underline" }}>
-              Unsplash
-            </a>
-            . Ganti dengan dokumentasi proyek sebelum peluncuran.
+            NPWP {company.npwp} &middot; KBLI {company.kbli}
           </span>
         </div>
       </div>

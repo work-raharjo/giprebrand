@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header, Footer } from "../../components/Chrome";
 import { company, images, stats } from "../../lib/content";
 
@@ -17,15 +18,14 @@ export default function Page() {
             <p className="eyebrow">Tentang kami</p>
             <h1>Satu kompetensi, tiga medan yang berbeda</h1>
             <p className="lede" style={{ marginTop: 20 }}>
-              {company.name} berkedudukan di Bandung dan bekerja di seluruh Indonesia. Kami memulai dari layanan
-              jaringan terkelola, lalu berkembang ke produksi teknis event dan konektivitas maritim karena
-              pelanggan kami membutuhkan hal yang sama di tiga situasi yang berbeda.
+              {company.name} berkantor di Jakarta, Batam, dan Bandung, serta bekerja di seluruh Indonesia. Kami
+              mulai dari layanan jaringan terkelola, lalu masuk ke produksi teknis event dan konektivitas maritim
+              karena pelanggan meminta hal yang sama di tiga situasi berbeda.
             </p>
             <p className="lede" style={{ marginTop: 14 }}>
               Model bisnis kami berbasis paket bandwidth dan layanan terkelola. Perangkat di lokasi kami miliki dan
-              kami rawat sendiri, sementara kapasitas upstream disediakan oleh mitra pemegang lisensi
-              telekomunikasi. Struktur ini membuat tanggung jawab operasional jelas dan waktu penanganan insiden
-              lebih pendek.
+              rawat sendiri, sementara kapasitas upstream disediakan mitra pemegang lisensi telekomunikasi.
+              Pembagian ini membuat tanggung jawab operasional jelas dan penanganan insiden lebih cepat.
             </p>
           </div>
         </section>
@@ -49,10 +49,15 @@ export default function Page() {
               <p className="eyebrow">Cara kami bekerja</p>
               <h2>Lingkup dikunci sebelum pekerjaan dimulai</h2>
               <p className="lede" style={{ marginTop: 16 }}>
-                Setiap pekerjaan diawali site survey dan diakhiri berita acara. Kriteria penerimaan ditulis di muka,
-                sehingga tidak ada perdebatan mengenai apa yang dianggap selesai. Untuk layanan berlangganan,
-                target ketersediaan dan waktu pemulihan tercantum dalam SLA.
+                Setiap pekerjaan dibuka dengan site survey dan ditutup dengan berita acara. Kriteria penerimaan
+                ditulis di muka, jadi tidak ada perdebatan soal apa yang dihitung selesai. Untuk layanan
+                berlangganan, target ketersediaan dan waktu pemulihan tercantum dalam SLA.
               </p>
+              <div className="hero-actions">
+                <Link className="btn btn-outline" href="/legalitas">
+                  Legalitas dan kepatuhan
+                </Link>
+              </div>
             </div>
             <div className="story-img">
               <img src={images.connectAlt.src} alt={images.connectAlt.alt} />

@@ -8,7 +8,7 @@ export const metadata = {
     template: `%s | ${company.short}`,
   },
   description:
-    "GIP membangun, mengoperasikan, dan membongkar infrastruktur teknis di lokasi yang sulit. Event production, managed network service, dan konektivitas maritim.",
+    "GIP memasang, menjalankan, dan menjaga infrastruktur teknis di lapangan. Event production, managed network service, dan konektivitas maritim dengan cakupan Starlink global.",
   openGraph: {
     type: "website",
     locale: "id_ID",

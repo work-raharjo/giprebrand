@@ -1,5 +1,5 @@
 import { Header, Footer } from "../../components/Chrome";
-import { company } from "../../lib/content";
+import { company, offices } from "../../lib/content";
 
 export const metadata = {
   title: "Legalitas",
@@ -9,7 +9,7 @@ export const metadata = {
 
 const rows = [
   ["Nama badan hukum", company.name],
-  ["Alamat terdaftar", company.address],
+  ["Alamat terdaftar", offices[2].addr],
   ["NPWP", company.npwp],
   ["KBLI", company.kbli],
   ["Penanggung jawab", `${company.pic}, ${company.picRole}`],
@@ -42,15 +42,13 @@ export default function Page() {
               </table>
             </div>
 
+            {/* Peninjauan penasihat hukum wajib dilakukan sebelum halaman ini dipublikasikan. */}
             <h2 style={{ marginTop: 48 }}>Posisi terhadap lisensi telekomunikasi</h2>
             <p className="lede" style={{ marginTop: 14 }}>
               GIP beroperasi sebagai penyedia layanan terkelola dan penjual kembali jasa telekomunikasi. Kapasitas
-              upstream disediakan oleh mitra pemegang lisensi penyelenggaraan telekomunikasi, dan kewajiban yang
-              melekat pada lisensi tersebut berada pada pihak pemegang lisensi. GIP bertanggung jawab atas
-              perangkat di lokasi pelanggan, konfigurasi, pemantauan, dan dukungan operasional.
-            </p>
-            <p className="form-note" style={{ marginTop: 20 }}>
-              Isi halaman ini perlu ditinjau oleh penasihat hukum perusahaan sebelum dipublikasikan.
+              upstream disediakan mitra pemegang lisensi penyelenggaraan telekomunikasi, dan kewajiban yang melekat
+              pada lisensi tersebut berada pada pemegang lisensi. GIP bertanggung jawab atas perangkat di lokasi
+              pelanggan, konfigurasi, pemantauan, dan dukungan operasional.
             </p>
           </div>
         </section>

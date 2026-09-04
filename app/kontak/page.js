@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Header, Footer, waLink } from "../../components/Chrome";
-import { company, verticalList } from "../../lib/content";
+import { company, offices, verticalList } from "../../lib/content";
 
 export const metadata = {
   title: "Kontak",
@@ -17,8 +17,8 @@ export default function Page() {
             <p className="eyebrow">Kontak</p>
             <h1>Mari bicara</h1>
             <p className="lede" style={{ marginTop: 18 }}>
-              Untuk kebutuhan yang mendesak, WhatsApp adalah jalur tercepat. Untuk pengadaan formal, kirimkan
-              kerangka kebutuhan melalui surel dan kami balas dengan penawaran tertulis.
+              Untuk kebutuhan mendesak, WhatsApp jalur tercepat. Untuk pengadaan formal, kirim kerangka kebutuhan
+              lewat surel dan kami balas dengan penawaran tertulis.
             </p>
 
             <div className="grid grid-2" style={{ marginTop: 34 }}>
@@ -38,14 +38,24 @@ export default function Page() {
                   <br />
                   <a href={`tel:${company.phone}`} style={{ textDecoration: "underline" }}>{company.phone}</a>
                 </p>
-                <p style={{ marginTop: 10 }}>{company.address}</p>
+                <p style={{ marginTop: 10 }}>Jakarta &middot; Batam &middot; Bandung</p>
               </div>
+            </div>
+
+            <h2 style={{ marginTop: 52 }}>Kantor</h2>
+            <div className="grid grid-3" style={{ marginTop: 24 }}>
+              {offices.map((o) => (
+                <div className="card" key={o.city}>
+                  <h3>{o.city}</h3>
+                  <p>{o.addr}</p>
+                </div>
+              ))}
             </div>
 
             <h2 style={{ marginTop: 52 }}>Formulir sesuai lini layanan</h2>
             <p className="lede" style={{ marginTop: 12 }}>
-              Setiap lini memiliki formulir dengan pertanyaan yang berbeda, agar tim kami bisa menyiapkan jawaban
-              yang tepat sejak balasan pertama.
+              Tiap lini punya pertanyaan yang berbeda, supaya tim kami bisa menyiapkan jawaban yang tepat sejak
+              balasan pertama.
             </p>
             <div className="hero-actions">
               {verticalList.map((v) => (

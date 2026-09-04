@@ -19,8 +19,9 @@ export default function VerticalPage({ v }) {
 
       <main id="konten">
         <section className="vhero">
+          <img src="/gip-mark.jpg" alt="" className="vhero-motif" />
           <div className="wrap vhero-grid">
-            <div style={{ paddingBottom: 64 }}>
+            <div style={{ paddingBottom: 68 }}>
               <p className="eyebrow" style={{ color: v.accentDark, opacity: 0.7 }}>
                 {v.tagline}
               </p>
@@ -55,7 +56,7 @@ export default function VerticalPage({ v }) {
         <section className="section" id="layanan">
           <div className="wrap">
             <p className="eyebrow">Lingkup layanan</p>
-            <h2>Yang kami kerjakan pada lini ini</h2>
+            <h2>{v.servicesTitle}</h2>
             <div className="grid grid-4" style={{ marginTop: 32 }}>
               {v.services.map((s) => (
                 <div className="card" key={s.title}>
@@ -74,7 +75,7 @@ export default function VerticalPage({ v }) {
           <section className="section section-alt">
             <div className="wrap">
               <p className="eyebrow">Paket</p>
-              <h2>Tiga tingkat, lingkup tertulis</h2>
+              <h2>Tiga tingkat, lingkupnya tertulis</h2>
               <div className="grid grid-3" style={{ marginTop: 32 }}>
                 {v.packages.map((p) => (
                   <div className={`card ${p.featured ? "card-featured" : ""}`} key={p.name}>
@@ -92,7 +93,8 @@ export default function VerticalPage({ v }) {
                 ))}
               </div>
               <p className="form-note" style={{ marginTop: 20 }}>
-                Harga menyesuaikan durasi, venue, dan hasil site survey. Penawaran tertulis dikirim setelah lingkup dikunci.
+                Harga menyesuaikan durasi, venue, dan hasil site survey. Penawaran tertulis kami kirim setelah
+                lingkup dikunci.
               </p>
             </div>
           </section>
@@ -118,7 +120,7 @@ export default function VerticalPage({ v }) {
             <p className="eyebrow">Mulai percakapan</p>
             <h2>Kirim kebutuhan Anda</h2>
             <p className="lede" style={{ marginTop: 12, marginBottom: 28 }}>
-              Isi ringkas saja. Kami akan menghubungi Anda untuk melengkapi detail teknisnya.
+              Isi ringkas saja. Detail teknisnya kami lengkapi lewat telepon.
             </p>
             <LeadForm
               fields={v.formFields}
