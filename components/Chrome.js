@@ -165,9 +165,6 @@ export function Footer() {
           <span>
             &copy; {new Date().getFullYear()} {company.name}. Seluruh hak dilindungi.
           </span>
-          <span>
-            NPWP {company.npwp} &middot; KBLI {company.kbli}
-          </span>
         </div>
       </div>
     </footer>

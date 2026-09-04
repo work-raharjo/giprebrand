@@ -10,9 +10,6 @@ export const metadata = {
 const rows = [
   ["Nama badan hukum", company.name],
   ["Alamat terdaftar", offices[2].addr],
-  ["NPWP", company.npwp],
-  ["KBLI", company.kbli],
-  ["Penanggung jawab", `${company.pic}, ${company.picRole}`],
 ];
 
 export default function Page() {
