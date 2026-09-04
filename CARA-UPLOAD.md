@@ -7,13 +7,14 @@ dan siap menimpa berkas lama.
 
 | Berkas | Perubahan |
 | --- | --- |
-| `app/page.js` | Urutan section baru, copy hero baru, section partner dan klien, panel CTA gabungan, motif logo di hero. Section slot "Klien 1-5" dihapus |
+| `app/page.js` | Skip link "Lompat ke konten" dihapus. Urutan section baru, copy hero baru, section partner dan klien, panel CTA gabungan, motif logo di hero. Section slot "Klien 1-5" dihapus |
 | `app/globals.css` | Class baru `.logo-mark-img`, `.hero-motif`, `.vhero-motif`, `.cta-panel`, `.logo-row`, `.footer-offices`. Media query 700px untuk header dan footer. Gradien hero jadi diagonal |
-| `app/layout.js` | Deskripsi metadata disesuaikan |
+| `app/layout.js` | Deskripsi metadata disesuaikan, StickyChat dipasang di seluruh halaman |
 | `app/tentang-kami/page.js` | Copy ditulis ulang, tiga kota kantor, tombol ke halaman legalitas |
 | `app/legalitas/page.js` | Catatan "perlu ditinjau penasihat hukum" dipindah jadi komentar kode, copy disederhanakan |
 | `app/kontak/page.js` | Copy diperbaiki, section Kantor berisi tiga alamat |
 | `app/event/page.js`, `app/connect/page.js`, `app/marine/page.js` | Metadata description gip.marine disesuaikan ke cakupan global |
+| `components/StickyChat.js` | Berkas baru, tombol WhatsApp mengapung ke nomor 6282126851122 |
 | `components/Chrome.js` | Monogram teks "GIP" diganti logo mark, baris kredit Unsplash di footer diganti NPWP dan KBLI, blok Kantor di footer, email `sales@gip.co.id` |
 | `components/VerticalPage.js` | Motif logo di vhero, judul section layanan per lini, copy paket dan formulir |
 | `components/LeadForm.js` | Border input merah saat error, tinggi pesan error tetap, copy status kirim |
@@ -21,6 +22,8 @@ dan siap menimpa berkas lama.
 | `README.md` | Checklist peluncuran diperbarui |
 | `CREDITS.md` | Catatan logo partner dan klien |
 | `public/gip-mark.jpg` | Berkas baru, logo GIP |
+| `app/icon.jpg`, `app/apple-icon.jpg` | Berkas baru, favicon tab browser dan ikon iOS |
+| `public/partners/`, `public/clients/` | Berkas baru, 10 logo partner dan klien, diambil dari repo `gip-maritime` |
 
 ## Langkah upload
 
@@ -32,8 +35,7 @@ dan siap menimpa berkas lama.
 
 ## Yang masih perlu dikerjakan setelah upload
 
-1. **Logo partner dan klien** sementara diambil langsung dari `https://www.gip.co.id/partners/` dan `/clients/`. Unduh ke `public/partners/` dan `public/clients/`, lalu ubah `src` di `lib/content.js` jadi path lokal. Selama URL lama masih hidup, section ini tetap tampil normal.
-2. **Angka `stats`** di `lib/content.js` masih contoh dan sekarang tampil tanpa disclaimer. Ganti dengan data operasional aktual.
-3. **Foto Unsplash** masih penampung. Ganti dengan dokumentasi proyek GIP.
-4. **Halaman legalitas** perlu tinjauan penasihat hukum.
-5. **Logo GIP** masih JPEG berlatar putih. Kalau ada versi SVG atau PNG transparan, ganti dan hapus `filter: invert(1)` serta `mix-blend-mode` pada `.hero-motif` di `globals.css`.
+1. **Angka `stats`** di `lib/content.js` masih contoh dan sekarang tampil tanpa disclaimer. Ganti dengan data operasional aktual.
+2. **Foto Unsplash** masih penampung. Ganti dengan dokumentasi proyek GIP.
+3. **Halaman legalitas** perlu tinjauan penasihat hukum.
+4. **Logo GIP** masih JPEG berlatar putih. Kalau ada versi SVG atau PNG transparan, ganti dan hapus `filter: invert(1)` serta `mix-blend-mode` pada `.hero-motif` di `globals.css`.

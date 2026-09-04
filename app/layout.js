@@ -1,4 +1,5 @@
 import "./globals.css";
+import StickyChat from "../components/StickyChat";
 import { company } from "../lib/content";
 
 export const metadata = {
@@ -19,7 +20,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body>{children}</body>
+      <body>
+        {children}
+        <StickyChat />
+      </body>
     </html>
   );
 }

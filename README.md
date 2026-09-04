@@ -37,6 +37,8 @@ lib/
   content.js         Seluruh teks, warna aksen, data gambar, partner, klien, kantor
 public/
   gip-mark.jpg       Logo GIP
+  partners/          Logo partner teknologi
+  clients/           Logo klien
 ```
 
 ## Mengubah isi
@@ -57,8 +59,7 @@ Warna aksen induk tetap navy `#1c3f94`. Warna cyan pada logo tidak dipakai sebag
 
 1. **Foto.** Seluruh gambar masih berasal dari Unsplash sebagai penampung sementara. Ganti dengan dokumentasi proyek asli, terutama pada blok portfolio dan studi kasus. Lihat `CREDITS.md`.
 2. **Angka kredibilitas.** Nilai pada `stats` di `lib/content.js` masih contoh, dan sekarang tampil tanpa disclaimer.
-3. **Logo partner dan klien.** `partners` dan `clients` di `lib/content.js` sementara memuat berkas dari `https://www.gip.co.id`. Unduh ke `public/partners/` dan `public/clients/`, lalu ubah `src` menjadi path lokal.
-4. **Isi halaman legalitas.** Perlu ditinjau penasihat hukum sebelum dipublikasikan.
+3. **Isi halaman legalitas.** Perlu ditinjau penasihat hukum sebelum dipublikasikan.
 
 ## Formulir
 

@@ -12,9 +12,6 @@ export default function VerticalPage({ v }) {
 
   return (
     <div style={style}>
-      <a href="#konten" className="skip">
-        Lompat ke konten
-      </a>
       <Header vertical={v} />
 
       <main id="konten">

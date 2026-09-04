@@ -5,9 +5,6 @@ import { clients, images, partners, stats, verticalList } from "../lib/content";
 export default function Home() {
   return (
     <>
-      <a href="#konten" className="skip">
-        Lompat ke konten
-      </a>
       <Header />
 
       <main id="konten">
