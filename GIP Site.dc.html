@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; color: #14161a; background: #ffffff; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: #142f6f; text-decoration: none; }
+  a:hover { color: #1c3f94; }
+  h1, h2, h3, h4 { margin: 0; font-family: Inter, sans-serif; line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; }
+  p { margin: 0; }
+  input, textarea, button { font-family: inherit; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column;">
+
+<header style="position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid #e4e6ea;">
+  <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; min-height: 66px; padding-top: 10px; padding-bottom: 10px; gap: 12px 20px; flex-wrap: wrap;">
+    <a href="#" onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; color: #14161a;">
+      <img src="assets/gip-mark.jpg" alt="Logo GIP" style="width: 30px; height: 30px; border-radius: 7px; object-fit: cover;" />
+      <span>gip.co.id<span style="color: #8b919b; font-weight: 400;">{{ verticalSuffix }}</span></span>
+    </a>
+
+    <sc-if value="{{ isVertical }}" hint-placeholder-val="{{ false }}">
+      <nav aria-label="Pilih lini layanan" style="display: flex; gap: 8px; font-size: 0.83rem; align-items: center; flex-wrap: wrap; justify-content: flex-end;">
+        <sc-for list="{{ switcher }}" as="s" hint-placeholder-count="3">
+          <a href="#" onClick="{{ s.go }}" style="padding: 6px 12px; border-radius: 999px; border: 1px solid {{ s.borderColor }}; background: {{ s.bg }}; color: {{ s.color }};">{{ s.name }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+
+    <sc-if value="{{ isTop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Navigasi utama" style="display: flex; align-items: center; gap: 12px 22px; font-size: 0.9rem; flex-wrap: wrap; justify-content: flex-end;">
+        <a href="#" onClick="{{ goEvent }}" style="color: #545a63;" style-hover="color: #14161a;">gip.event</a>
+        <a href="#" onClick="{{ goConnect }}" style="color: #545a63;" style-hover="color: #14161a;">gip.connect</a>
+        <a href="#" onClick="{{ goMarine }}" style="color: #545a63;" style-hover="color: #14161a;">gip.marine</a>
+        <a href="#" onClick="{{ goAbout }}" style="color: #545a63;" style-hover="color: #14161a;">Tentang</a>
+        <a href="#" onClick="{{ goContact }}" style="padding: 8px 16px; border: 1px solid #e4e6ea; border-radius: 10px; color: #14161a;" style-hover="background: #f6f7f9;">Hubungi kami</a>
+      </nav>
+    </sc-if>
+  </div>
+</header>
+
+<main style="flex: 1;">
+
+<!-- HOME -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div>
+  <section style="position: relative; min-height: 580px; display: grid; align-items: center; overflow: hidden; background: #0d1015;">
+    <div style="position: absolute; inset: 0;">
+      <img src="https://images.unsplash.com/photo-1657208431551-cbf415b8ef26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920" alt="Sorot lampu panggung menembus ruangan gelap berkabut" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+      <div style="position: absolute; inset: 0; background: linear-gradient(105deg, rgba(9,11,15,0.94) 0%, rgba(10,12,16,0.72) 55%, rgba(10,12,16,0.5) 100%);"></div>
+      <img src="assets/gip-mark.jpg" alt="" style="position: absolute; right: -140px; bottom: -180px; width: 720px; height: 720px; filter: invert(1); mix-blend-mode: screen; opacity: 0.16;" />
+    </div>
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
+      <div style="color: #fff; padding: 104px 0; max-width: 47rem;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 18px;">PT Galactic Indonesia Perkasa</p>
+        <h1 style="color: #fff; font-size: clamp(2.1rem, 4.8vw, 3.35rem); font-weight: 700;">Kami pasang, jalankan, dan jaga infrastruktur teknis di lapangan</h1>
+        <p style="color: rgba(255,255,255,0.8); font-size: 1.12rem; margin-top: 22px; max-width: 38rem;">Event production, jaringan kantor multi cabang, dan konektivitas maritim. Tiga lini, satu tim lapangan yang sama.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px;">
+          <a href="#lini" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; background: #1c3f94; color: #fff; border: 1px solid #1c3f94;" style-hover="background: #142f6f;">Lihat tiga lini</a>
+          <a href="#" onClick="{{ goAbout }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid rgba(255,255,255,0.45); color: #fff;" style-hover="background: rgba(255,255,255,0.1);">Tentang GIP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lini" style="padding: 76px 0;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Tiga lini layanan</p>
+      <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Mulai dari yang paling dekat dengan kebutuhan Anda</h2>
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 34px;">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+          <a href="#" onClick="{{ c.go }}" style="border: 1px solid #e4e6ea; border-radius: 14px; overflow: hidden; background: #fff; display: flex; flex-direction: column; color: #14161a; transition: border-color 0.15s ease, transform 0.15s ease;" style-hover="border-color: #8b919b; transform: translateY(-2px);">
+            <div style="aspect-ratio: 16 / 10; overflow: hidden;">
+              <img src="{{ c.img }}" alt="{{ c.alt }}" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div style="padding: 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+              <span style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: {{ c.accentDark }};">{{ c.tagline }}</span>
+              <h3 style="font-size: 1.15rem;">{{ c.name }}</h3>
+              <p style="color: #545a63; font-size: 0.93rem; flex: 1;">{{ c.blurb }}</p>
+              <span style="font-size: 0.9rem; font-weight: 500; margin-top: 6px; color: {{ c.accentDark }};">{{ c.linkLabel }}</span>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 76px 0; background: #f6f7f9; border-top: 1px solid #e4e6ea; border-bottom: 1px solid #e4e6ea;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 56px; align-items: center;">
+      <div>
+        <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Kenapa satu perusahaan</p>
+        <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Alatnya berbeda, pekerjaannya sama</h2>
+        <p style="font-size: 1.05rem; color: #545a63; max-width: 52ch; margin-top: 18px;">Panggung, kantor cabang, dan kapal menuntut hal yang sama dari kami: pasang cepat, jalan tanpa putus, orangnya ada di lokasi, dan tidak ada kesempatan mengulang.</p>
+        <p style="font-size: 1.05rem; color: #545a63; max-width: 52ch; margin-top: 14px;">LED, line array, switch, dan terminal satelit hanya alat kerja. Yang kami tanggung adalah semuanya bekerja pada saat dipakai.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;">
+          <a href="#" onClick="{{ goAbout }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #e4e6ea; background: #fff; color: #14161a;" style-hover="background: #f6f7f9;">Cara kami bekerja</a>
+        </div>
+      </div>
+      <div style="border-radius: 14px; overflow: hidden; aspect-ratio: 4 / 3;">
+        <img src="https://images.unsplash.com/photo-1729553199933-c897fea4f41f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920" alt="Kerumunan penonton di ruang pertunjukan gelap" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+  <section style="padding: 64px 0;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 20px;">Rekam jejak gabungan</p>
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="background: #f6f7f9; border-radius: 12px; padding: 22px;">
+            <div style="font-size: 0.85rem; color: #545a63;">{{ s.label }}</div>
+            <div style="font-family: Inter, sans-serif; font-size: 1.95rem; font-weight: 600; letter-spacing: -0.03em; margin-top: 4px;">{{ s.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section style="padding: 24px 0 88px;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <div style="border: 1px solid #e4e6ea; border-radius: 16px; background: #eef2fb; padding: 46px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px;">
+        <div style="max-width: 40rem;">
+          <h2 style="font-size: clamp(1.5rem, 2.6vw, 2rem); color: #142f6f;">Ada rencana yang perlu dibicarakan</h2>
+          <p style="font-size: 1.05rem; color: #142f6f; opacity: 0.85; margin-top: 12px;">Kebutuhan event biasanya mendesak, jadi WhatsApp lebih cepat. Untuk jaringan dan maritim, kirim kerangka kebutuhannya lewat formulir.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="{{ waEvent }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; background: #1c3f94; color: #fff; border: 1px solid #1c3f94;" style-hover="background: #142f6f;">Chat WhatsApp</a>
+          <a href="#" onClick="{{ goMarine }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #c9d4ea; background: #fff; color: #142f6f;" style-hover="background: #f6f7f9;">Ajukan proposal konektivitas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- VERTICAL -->
+<sc-if value="{{ isVertical }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="background: {{ v.accentSoft }}; padding: 76px 0 0; border-bottom: 1px solid #e4e6ea; position: relative; overflow: hidden;">
+    <img src="assets/gip-mark.jpg" alt="" style="position: absolute; left: -120px; top: -120px; width: 420px; height: 420px; mix-blend-mode: multiply; opacity: 0.07;" />
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 48px; align-items: end; position: relative;">
+      <div style="padding-bottom: 68px;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; color: {{ v.accentDark }};">{{ v.tagline }}</p>
+        <h1 style="font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 700; color: {{ v.accentDark }};">{{ v.heroTitle }}</h1>
+        <p style="font-size: 1.08rem; max-width: 46ch; margin-top: 18px; color: {{ v.accentDark }}; opacity: 0.85;">{{ v.heroSub }}</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px;">
+          <a href="{{ v.primaryHref }}" target="{{ v.primaryTarget }}" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; color: #fff; background: {{ v.accent }}; border: 1px solid {{ v.accent }};">{{ v.primaryLabel }}</a>
+          <a href="{{ v.secondaryHref }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid rgba(20,22,26,0.14); background: #fff; color: #14161a;">{{ v.secondaryLabel }}</a>
+        </div>
+      </div>
+      <div style="border-radius: 12px 12px 0 0; overflow: hidden; aspect-ratio: 4 / 3;">
+        <img src="{{ v.heroImg }}" alt="{{ v.heroAlt }}" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan" style="padding: 76px 0;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Lingkup layanan</p>
+      <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">{{ v.servicesTitle }}</h2>
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 32px;">
+        <sc-for list="{{ v.services }}" as="s" hint-placeholder-count="4">
+          <div style="border: 1px solid #e4e6ea; border-radius: 12px; padding: 22px; background: #fff;">
+            <div style="width: 38px; height: 38px; border-radius: 9px; display: grid; place-items: center; margin-bottom: 14px; background: {{ v.accentSoft }}; color: {{ v.accentDark }};">{{ s.icon }}</div>
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">{{ s.title }}</h3>
+            <p style="color: #545a63; font-size: 0.92rem;">{{ s.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ v.hasPackages }}" hint-placeholder-val="{{ false }}">
+  <section style="padding: 76px 0; background: #f6f7f9; border-top: 1px solid #e4e6ea; border-bottom: 1px solid #e4e6ea;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Paket</p>
+      <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Tiga tingkat, lingkupnya tertulis</h2>
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 32px;">
+        <sc-for list="{{ v.packages }}" as="p" hint-placeholder-count="3">
+          <div style="border: {{ p.border }}; border-radius: 12px; padding: 24px; background: #fff;">
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">{{ p.name }}</h3>
+            <p style="color: #545a63; font-size: 0.92rem;">{{ p.desc }}</p>
+            <ul style="list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 9px;">
+              <sc-for list="{{ p.items }}" as="i" hint-placeholder-count="4">
+                <li style="display: flex; gap: 9px; font-size: 0.91rem; color: #545a63;">
+                  <span style="flex-shrink: 0; margin-top: 3px; color: {{ v.accent }};">{{ p.check }}</span>
+                  <span>{{ i }}</span>
+                </li>
+              </sc-for>
+            </ul>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size: 0.85rem; color: #8b919b; margin-top: 20px;">Harga menyesuaikan durasi, venue, dan hasil site survey. Penawaran tertulis kami kirim setelah lingkup dikunci.</p>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="bukti" style="padding: 76px 0; background: {{ v.proofBg }};">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Bukti dan jaminan</p>
+      <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Yang bisa Anda periksa sebelum memutuskan</h2>
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 32px;">
+        <sc-for list="{{ v.proof }}" as="p" hint-placeholder-count="3">
+          <div style="border: 1px solid #e4e6ea; border-radius: 12px; padding: 22px; background: #fff;">
+            <h3 style="font-size: 1.05rem; margin-bottom: 6px;">{{ p.title }}</h3>
+            <p style="color: #545a63; font-size: 0.92rem;">{{ p.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" style="padding: 76px 0; background: #f6f7f9; border-top: 1px solid #e4e6ea;">
+    <div style="max-width: 760px; margin: 0 auto; padding: 0 24px;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Mulai percakapan</p>
+      <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Kirim kebutuhan Anda</h2>
+      <p style="font-size: 1.05rem; color: #545a63; margin-top: 12px; margin-bottom: 28px;">Isi ringkas saja. Detail teknisnya kami lengkapi lewat telepon.</p>
+
+      <div style="border: 1px solid #e4e6ea; border-radius: 14px; padding: 28px; background: #fff;">
+        <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+          <sc-for list="{{ formFields }}" as="f" hint-placeholder-count="5">
+            <div>
+              <label for="{{ f.key }}" style="display: block; font-size: 0.85rem; color: #545a63; margin-bottom: 6px;">{{ f.label }}</label>
+              <input id="{{ f.key }}" type="text" placeholder="{{ f.placeholder }}" value="{{ f.value }}" onChange="{{ f.onChange }}" style="width: 100%; padding: 12px 13px; border: 1px solid {{ f.borderColor }}; border-radius: 10px; font-size: 0.93rem; color: #14161a; background: #fff;" />
+              <div style="color: #c0392b; font-size: 0.8rem; margin-top: 5px; min-height: 1em;">{{ f.error }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 12px;">
+          <span style="font-size: 0.85rem; color: #8b919b;">{{ v.responseTime }}</span>
+          <button type="button" onClick="{{ submitForm }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; color: #fff; cursor: pointer; background: {{ v.accent }}; border: 1px solid {{ v.accent }};">{{ v.formCta }}</button>
+        </div>
+        <p style="font-size: 0.88rem; margin-top: 14px; color: {{ v.accentDark }};">{{ sentNote }}</p>
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- TENTANG KAMI -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+<div>
+  <section style="padding: 76px 0 64px;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+      <div style="max-width: 44rem;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Tentang kami</p>
+        <h1 style="font-size: clamp(2rem, 4.2vw, 2.9rem); font-weight: 700;">Satu kompetensi, tiga medan yang berbeda</h1>
+        <p style="font-size: 1.08rem; color: #545a63; margin-top: 20px;">PT Galactic Indonesia Perkasa berkantor di Bandung dan bekerja di seluruh Indonesia. Kami mulai dari layanan jaringan terkelola, lalu masuk ke produksi teknis event dan konektivitas maritim karena pelanggan meminta hal yang sama di tiga situasi berbeda.</p>
+        <p style="font-size: 1.08rem; color: #545a63; margin-top: 14px;">Model bisnis kami berbasis paket bandwidth dan layanan terkelola. Perangkat di lokasi kami miliki dan rawat sendiri, sementara kapasitas upstream disediakan mitra pemegang lisensi telekomunikasi. Pembagian ini membuat tanggung jawab operasional jelas dan penanganan insiden lebih cepat.</p>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+  <section style="padding: 56px 0; background: #f6f7f9; border-top: 1px solid #e4e6ea; border-bottom: 1px solid #e4e6ea;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="background: #fff; border-radius: 12px; padding: 22px;">
+          <div style="font-size: 0.85rem; color: #545a63;">{{ s.label }}</div>
+          <div style="font-family: Inter, sans-serif; font-size: 1.95rem; font-weight: 600; letter-spacing: -0.03em; margin-top: 4px;">{{ s.value }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+  </sc-if>
+
+  <section style="padding: 76px 0;">
+    <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 56px; align-items: center;">
+      <div>
+        <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Cara kami bekerja</p>
+        <h2 style="font-size: clamp(1.6rem, 2.9vw, 2.2rem);">Lingkup dikunci sebelum pekerjaan dimulai</h2>
+        <p style="font-size: 1.05rem; color: #545a63; margin-top: 16px;">Setiap pekerjaan dibuka dengan site survey dan ditutup dengan berita acara. Kriteria penerimaan ditulis di muka, jadi tidak ada perdebatan soal apa yang dihitung selesai. Untuk layanan berlangganan, target ketersediaan dan waktu pemulihan tercantum dalam SLA.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;">
+          <a href="#" onClick="{{ goLegal }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #e4e6ea; background: #fff; color: #14161a;" style-hover="background: #f6f7f9;">Legalitas dan kepatuhan</a>
+        </div>
+      </div>
+      <div style="border-radius: 14px; overflow: hidden; aspect-ratio: 4 / 3;">
+        <img src="https://images.unsplash.com/photo-1783683783819-e6cb806bba69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920" alt="Kabel ethernet terpasang pada perangkat jaringan" style="width: 100%; height: 100%; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- LEGALITAS -->
+<sc-if value="{{ isLegal }}" hint-placeholder-val="{{ false }}">
+<section style="padding: 76px 0 88px;">
+  <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+    <div style="max-width: 44rem;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Legalitas dan kepatuhan</p>
+      <h1 style="font-size: clamp(2rem, 4.2vw, 2.9rem); font-weight: 700;">Dokumen yang biasa diminta procurement</h1>
+      <p style="font-size: 1.08rem; color: #545a63; margin-top: 18px;">Halaman ini merangkum identitas badan hukum dan posisi kepatuhan kami. Salinan dokumen lengkap tersedia atas permintaan untuk keperluan vendor registration.</p>
+
+      <div style="border: 1px solid #e4e6ea; border-radius: 14px; margin-top: 32px; overflow: hidden; background: #fff;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
+          <tbody>
+            <sc-for list="{{ legalRows }}" as="r" hint-placeholder-count="5">
+              <tr>
+                <th style="text-align: left; padding: 14px; border-bottom: 1px solid #e4e6ea; vertical-align: top; width: 34%; font-weight: 600; color: #545a63; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase;">{{ r.k }}</th>
+                <td style="text-align: left; padding: 14px; border-bottom: 1px solid #e4e6ea; vertical-align: top;">{{ r.v }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="margin-top: 48px; font-size: clamp(1.5rem, 2.6vw, 2rem);">Posisi terhadap lisensi telekomunikasi</h2>
+      <p style="font-size: 1.05rem; color: #545a63; margin-top: 14px;">GIP beroperasi sebagai penyedia layanan terkelola dan penjual kembali jasa telekomunikasi. Kapasitas upstream disediakan mitra pemegang lisensi penyelenggaraan telekomunikasi, dan kewajiban yang melekat pada lisensi tersebut berada pada pemegang lisensi. GIP bertanggung jawab atas perangkat di lokasi pelanggan, konfigurasi, pemantauan, dan dukungan operasional.</p>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<!-- KONTAK -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<section style="padding: 76px 0 88px;">
+  <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+    <div style="max-width: 44rem;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: #8b919b; font-weight: 600; margin-bottom: 12px;">Kontak</p>
+      <h1 style="font-size: clamp(2rem, 4.2vw, 2.9rem); font-weight: 700;">Mari bicara</h1>
+      <p style="font-size: 1.08rem; color: #545a63; margin-top: 18px;">Untuk kebutuhan mendesak, WhatsApp jalur tercepat. Untuk pengadaan formal, kirim kerangka kebutuhan lewat surel dan kami balas dengan penawaran tertulis.</p>
+    </div>
+
+    <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 34px; max-width: 44rem;">
+      <div style="border: 1px solid #e4e6ea; border-radius: 12px; padding: 22px; background: #fff;">
+        <h3 style="font-size: 1.05rem; margin-bottom: 6px;">WhatsApp</h3>
+        <p style="color: #545a63; font-size: 0.92rem;">Respons di bawah satu jam pada jam kerja.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px;">
+          <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; background: #1c3f94; color: #fff; border: 1px solid #1c3f94;" style-hover="background: #142f6f;">Buka WhatsApp</a>
+        </div>
+      </div>
+      <div style="border: 1px solid #e4e6ea; border-radius: 12px; padding: 22px; background: #fff;">
+        <h3 style="font-size: 1.05rem; margin-bottom: 6px;">Surel dan telepon</h3>
+        <p style="color: #545a63; font-size: 0.92rem;">
+          <a href="mailto:andy@gip.co.id" style="text-decoration: underline;">andy@gip.co.id</a><br />
+          <a href="tel:022-87326585" style="text-decoration: underline;">022-87326585</a>
+        </p>
+        <p style="color: #545a63; font-size: 0.92rem; margin-top: 10px;">Jl. Buah Batu No. 161, Kota Bandung, Jawa Barat</p>
+      </div>
+    </div>
+
+    <div style="max-width: 44rem;">
+      <h2 style="margin-top: 52px; font-size: clamp(1.5rem, 2.6vw, 2rem);">Formulir sesuai lini layanan</h2>
+      <p style="font-size: 1.05rem; color: #545a63; margin-top: 12px;">Tiap lini punya pertanyaan yang berbeda, supaya tim kami bisa menyiapkan jawaban yang tepat sejak balasan pertama.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px;">
+        <a href="#" onClick="{{ goEvent }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #e4e6ea; background: #fff; color: #14161a;" style-hover="background: #f6f7f9;">gip.event</a>
+        <a href="#" onClick="{{ goConnect }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #e4e6ea; background: #fff; color: #14161a;" style-hover="background: #f6f7f9;">gip.connect</a>
+        <a href="#" onClick="{{ goMarine }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 10px; font-size: 0.95rem; font-weight: 500; border: 1px solid #e4e6ea; background: #fff; color: #14161a;" style-hover="background: #f6f7f9;">gip.marine</a>
+      </div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+</main>
+
+<footer style="background: #f6f7f9; border-top: 1px solid #e4e6ea; padding: 56px 0 32px; font-size: 0.9rem;">
+  <div style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 34px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px;">
+          <img src="assets/gip-mark.jpg" alt="Logo GIP" style="width: 30px; height: 30px; border-radius: 7px; object-fit: cover;" />
+          <span>gip.co.id</span>
+        </div>
+        <p style="color: #545a63; max-width: 34ch;">Pasang, jalankan, dan jaga infrastruktur teknis di lapangan.</p>
+      </div>
+      <div>
+        <h4 style="font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8b919b; margin: 0 0 12px; font-weight: 600; font-family: Inter, sans-serif;">Layanan</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+          <li><a href="#" onClick="{{ goEvent }}" style="color: #545a63;" style-hover="color: #14161a;">gip.event</a></li>
+          <li><a href="#" onClick="{{ goConnect }}" style="color: #545a63;" style-hover="color: #14161a;">gip.connect</a></li>
+          <li><a href="#" onClick="{{ goMarine }}" style="color: #545a63;" style-hover="color: #14161a;">gip.marine</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8b919b; margin: 0 0 12px; font-weight: 600; font-family: Inter, sans-serif;">Perusahaan</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+          <li><a href="#" onClick="{{ goAbout }}" style="color: #545a63;" style-hover="color: #14161a;">Tentang kami</a></li>
+          <li><a href="#" onClick="{{ goLegal }}" style="color: #545a63;" style-hover="color: #14161a;">Legalitas</a></li>
+          <li><a href="#" onClick="{{ goContact }}" style="color: #545a63;" style-hover="color: #14161a;">Kontak</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #8b919b; margin: 0 0 12px; font-weight: 600; font-family: Inter, sans-serif;">Kontak</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
+          <li style="color: #545a63;">Jl. Buah Batu No. 161, Kota Bandung, Jawa Barat</li>
+          <li><a href="tel:022-87326585" style="color: #545a63;" style-hover="color: #14161a;">022-87326585</a></li>
+          <li><a href="mailto:andy@gip.co.id" style="color: #545a63;" style-hover="color: #14161a;">andy@gip.co.id</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 40px; padding-top: 22px; border-top: 1px solid #e4e6ea; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: #8b919b; font-size: 0.82rem;">
+      <span>&copy; 2026 PT Galactic Indonesia Perkasa. Seluruh hak dilindungi.</span>
+      <span>NPWP 0428 6684 6142 9000 &middot; KBLI 62209 dan 61994</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Konten&quot;},&quot;waNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;6282126851122&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Kontak&quot;}}">
+const U = (id) => `https://images.unsplash.com/photo-${id}?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1920`;
+
+const IMG = {
+  event: { src: U("1785807047494-0832619a3018"), alt: "Panggung utama dengan layar LED besar dan tata cahaya berwarna" },
+  eventAlt: { src: U("1761618291331-535983ae4296"), alt: "Pertunjukan panggung dengan penonton di ruang gelap" },
+  connect: { src: U("1762163516269-3c143e04175c"), alt: "Rak server dengan indikator hijau menyala" },
+  marine: { src: U("1724597500306-a4cbb7d1324e"), alt: "Pandangan udara kapal kontainer di tengah laut" },
+  marineAlt: { src: U("1670121180583-39ab653a071c"), alt: "Kapal kontainer besar di perairan terminal" },
+};
+
+const ICON = {
+  wifi: "M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01",
+  display: "M3 5h18v11H3zM8 20h8M12 16v4",
+  speaker: "M12 3h.01M6 3h12v18H6zM12 14a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+  bulb: "M9 18h6M10 21h4M9 14a5 5 0 1 1 6 0c-.7.6-1 1.2-1 2h-4c0-.8-.3-1.4-1-2z",
+  router: "M3 13h18v7H3zM7 17h.01M11 17h.01M6 13V9a6 6 0 0 1 12 0v4",
+  sitemap: "M4 15h4v4H4zM10 3h4v4h-4zM16 15h4v4h-4zM6 15v-3h12v3M12 12V7",
+  activity: "M3 12h4l3 8 4-16 3 8h4",
+  "shield-lock": "M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM12 11v3",
+  satellite: "M4 12l4-4 4 4-4 4zM13 5l6 6M15 3l6 6M12 16l4 4",
+  infinity: "M6.5 9a3 3 0 1 0 0 6c3 0 4-6 7-6a3 3 0 1 1 0 6c-3 0-4-6-7-6z",
+  "map-pin": "M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11zM12 10h.01",
+  headset: "M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v5H5a1 1 0 0 1-1-1zM20 14h-3v5h2a1 1 0 0 0 1-1z",
+};
+
+const VERTICALS = {
+  event: {
+    slug: "event", name: "gip.event", accent: "#D85A30", accentDark: "#993C1D", accentSoft: "#FAECE7",
+    tagline: "Event technology and production",
+    blurb: "Jaringan, LED, sound, dan lighting untuk event yang tidak boleh gagal.",
+    heroTitle: "Semuanya harus menyala tepat waktu, sekali jalan",
+    heroSub: "Kami pasang, operasikan, dan bongkar seluruh perangkat teknis event Anda. Satu tim, satu penanggung jawab.",
+    cardImage: "event", heroImage: "eventAlt",
+    servicesTitle: "Yang kami kerjakan di lini ini",
+    primary: { label: "Chat lewat WhatsApp", type: "wa" },
+    secondary: { label: "Lihat paket", href: "#layanan" },
+    responseTime: "Respons di bawah 1 jam pada jam kerja",
+    services: [
+      { icon: "wifi", title: "Event network", desc: "Wifi enterprise dual band, cabling, uplink redundan" },
+      { icon: "display", title: "LED dan visual", desc: "Videotron indoor dan outdoor, switcher, operator" },
+      { icon: "speaker", title: "Sound system", desc: "Line array, mixing, mikrofon, monitor panggung" },
+      { icon: "bulb", title: "Lighting dan rigging", desc: "Moving head, par, truss, dan struktur panggung" },
+    ],
+    proof: [
+      { title: "Portfolio venue", desc: "Dokumentasi pemasangan di gedung dan ruang terbuka" },
+      { title: "Paket transparan", desc: "Essential, Pro, dan Maxima dengan lingkup tertulis" },
+      { title: "Tim onsite", desc: "Engineer standby selama event berlangsung" },
+    ],
+    fields: [
+      { label: "Nama event", placeholder: "Product launch Q4" },
+      { label: "Tanggal pelaksanaan", placeholder: "12 Oktober 2026" },
+      { label: "Venue", placeholder: "Oil Building Center Thamrin" },
+      { label: "Perkiraan jumlah pax", placeholder: "300" },
+    ],
+    packages: [
+      { name: "Essential", desc: "Untuk rapat, workshop, dan gathering skala kecil.", items: ["Wifi dual band", "Network cabling", "Engineer onsite 8 jam", "Install dan dismantle"] },
+      { name: "Pro", desc: "Untuk konferensi dan aktivasi brand dengan kebutuhan visual.", items: ["Seluruh lingkup Essential", "Uplink satelit LEO cadangan", "LED atau proyeksi", "Sound dan lighting dasar"], featured: true },
+      { name: "Maxima", desc: "Untuk event besar dengan multi stage dan siaran langsung.", items: ["Seluruh lingkup Pro", "Uplink redundan penuh", "Line array dan moving head", "Site survey dan rehearsal"] },
+    ],
+  },
+  connect: {
+    slug: "connect", name: "gip.connect", accent: "#7F77DD", accentDark: "#534AB7", accentSoft: "#EEEDFE",
+    tagline: "Managed network service",
+    blurb: "Jaringan kantor dan multi cabang yang dirancang, dipasang, dan diawasi penuh.",
+    heroTitle: "Jaringan yang tidak perlu Anda pikirkan lagi",
+    heroSub: "Desain, instalasi, monitoring, dan eskalasi dalam satu layanan terkelola. Tim Anda kembali fokus ke pekerjaan utamanya.",
+    cardImage: "connect", heroImage: "connect",
+    servicesTitle: "Yang kami kelola di lini ini",
+    primary: { label: "Jadwalkan konsultasi", type: "form" },
+    secondary: { label: "Lihat lingkup SLA", href: "#bukti" },
+    responseTime: "Respons 1 sampai 2 hari kerja",
+    services: [
+      { icon: "router", title: "Managed wifi", desc: "Controller terpusat, segmentasi, captive portal" },
+      { icon: "sitemap", title: "Multi cabang", desc: "Topologi seragam, konfigurasi terstandardisasi" },
+      { icon: "activity", title: "Monitoring 24/7", desc: "Alert proaktif sebelum pengguna melapor" },
+      { icon: "shield-lock", title: "Segmentasi dan kontrol", desc: "Pemisahan trafik tamu, staf, dan operasional" },
+    ],
+    proof: [
+      { title: "SLA tertulis", desc: "Target uptime, waktu respons, dan waktu pemulihan" },
+      { title: "Laporan bulanan", desc: "Ketersediaan, insiden, dan rekomendasi perbaikan" },
+      { title: "Dokumentasi topologi", desc: "Diagram dan inventaris perangkat yang selalu diperbarui" },
+    ],
+    fields: [
+      { label: "Nama perusahaan", placeholder: "PT Contoh Nusantara" },
+      { label: "Jumlah lokasi", placeholder: "6 cabang" },
+      { label: "Perkiraan jumlah pengguna", placeholder: "250" },
+      { label: "Penyedia saat ini", placeholder: "Opsional" },
+    ],
+    packages: [],
+  },
+  marine: {
+    slug: "marine", name: "gip.marine", accent: "#1D9E75", accentDark: "#0F6E56", accentSoft: "#E1F5EE",
+    tagline: "Maritime and remote connectivity",
+    blurb: "Starlink dan konektivitas unlimited untuk kapal serta lokasi terpencil.",
+    heroTitle: "Koneksi yang tidak putus, dari dermaga sampai perairan lepas",
+    heroSub: "Instalasi, aktivasi, dan pengelolaan penuh oleh tim GIP. Anda cukup berlayar.",
+    cardImage: "marine", heroImage: "marineAlt",
+    servicesTitle: "Yang kami pasang di lini ini",
+    primary: { label: "Ajukan proposal", type: "form" },
+    secondary: { label: "Tanya area cakupan", href: "#bukti" },
+    responseTime: "Respons 1 sampai 2 hari kerja",
+    services: [
+      { icon: "satellite", title: "Starlink maritime", desc: "Instalasi, aktivasi, dan monitoring perangkat" },
+      { icon: "infinity", title: "Paket unlimited", desc: "Alokasi dan prioritas trafik per kapal" },
+      { icon: "map-pin", title: "Lokasi terpencil", desc: "Tambang, perkebunan, dan site tanpa jaringan darat" },
+      { icon: "headset", title: "Dukungan 24/7", desc: "NOC dan eskalasi langsung ke penyedia upstream" },
+    ],
+    proof: [
+      { title: "Area cakupan", desc: "Konfirmasi ketersediaan berdasarkan rute operasi" },
+      { title: "SLA dan uptime", desc: "Angka yang bisa diverifikasi, bukan klaim pemasaran" },
+      { title: "Legalitas dan kepatuhan", desc: "Posisi GIP terhadap lisensi telekomunikasi upstream" },
+    ],
+    fields: [
+      { label: "Nama kapal atau lokasi", placeholder: "MV Contoh Bahari" },
+      { label: "Rute atau wilayah operasi", placeholder: "Surabaya hingga Makassar" },
+      { label: "Jumlah pengguna", placeholder: "24 kru" },
+      { label: "Target mulai layanan", placeholder: "November 2026" },
+    ],
+    packages: [],
+  },
+};
+
+const ORDER = ["event", "connect", "marine"];
+
+class Component extends DCLogic {
+  state = { page: "home", values: {}, errors: {}, sent: false };
+
+  go = (page) => (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    this.setState({ page, values: {}, errors: {}, sent: false });
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+  };
+
+  wa(text) {
+    const n = this.props.waNumber ?? "6282126851122";
+    return `https://wa.me/${n}?text=${encodeURIComponent(text)}`;
+  }
+
+  icon(name, color) {
+    return React.createElement(
+      "svg",
+      { width: 20, height: 20, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", style: { color } },
+      React.createElement("path", { d: ICON[name] || ICON.activity })
+    );
+  }
+
+  check(color) {
+    return React.createElement(
+      "svg",
+      { width: 15, height: 15, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2.4, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", style: { color, display: "block" } },
+      React.createElement("path", { d: "M5 13l4 4L19 7" })
+    );
+  }
+
+  submit = () => {
+    const v = VERTICALS[this.state.page];
+    if (!v) return;
+    const labels = v.fields.map((f) => f.label).concat(["Nama dan nomor yang bisa dihubungi"]);
+    const next = {};
+    labels.forEach((l) => {
+      const val = this.state.values[l];
+      if (!val || !val.trim()) next[l] = "Wajib diisi";
+    });
+    this.setState({ errors: next });
+    if (Object.keys(next).length > 0) return;
+    const lines = labels.map((l) => `${l}: ${this.state.values[l]}`);
+    const msg = `Halo GIP, saya ingin menanyakan ${v.name}.\n\n${lines.join("\n")}`;
+    window.open(this.wa(msg), "_blank", "noopener");
+    this.setState({ sent: true });
+  };
+
+  renderVals() {
+    const page = this.state.page;
+    const v = VERTICALS[page];
+    const isVertical = !!v;
+    const showStats = this.props.showStats ?? true;
+
+    const out = {
+      isHome: page === "home",
+      isVertical,
+      isAbout: page === "about",
+      isLegal: page === "legal",
+      isContact: page === "contact",
+      isTop: !isVertical,
+      verticalSuffix: isVertical ? ` / ${v.slug}` : "",
+      showStats,
+      goHome: this.go("home"),
+      goEvent: this.go("event"),
+      goConnect: this.go("connect"),
+      goMarine: this.go("marine"),
+      goAbout: this.go("about"),
+      goLegal: this.go("legal"),
+      goContact: this.go("contact"),
+      waEvent: this.wa("Halo GIP, saya ingin menanyakan kebutuhan event."),
+      waGeneral: this.wa("Halo GIP, saya ingin berkonsultasi."),
+      stats: [
+        { label: "Event ditangani", value: "120+" },
+        { label: "Uptime rata rata", value: "99,8%" },
+        { label: "Kota dijangkau", value: "18" },
+        { label: "Respons awal", value: "< 1 jam" },
+      ],
+      legalRows: [
+        { k: "Nama badan hukum", v: "PT Galactic Indonesia Perkasa" },
+        { k: "Alamat terdaftar", v: "Jl. Buah Batu No. 161, Kota Bandung, Jawa Barat" },
+        { k: "NPWP", v: "0428 6684 6142 9000" },
+        { k: "KBLI", v: "62209 dan 61994" },
+        { k: "Penanggung jawab", v: "Andy Sastrawinata, GM Presales" },
+      ],
+      cards: ORDER.map((k) => {
+        const x = VERTICALS[k];
+        return {
+          name: x.name, tagline: x.tagline, blurb: x.blurb, accentDark: x.accentDark,
+          img: IMG[x.cardImage].src, alt: IMG[x.cardImage].alt,
+          linkLabel: "Masuk \u2192", go: this.go(k),
+        };
+      }),
+      switcher: ORDER.map((k) => {
+        const x = VERTICALS[k];
+        const on = isVertical && v.slug === x.slug;
+        return {
+          name: x.name, go: this.go(k),
+          bg: on ? x.accent : "transparent",
+          color: on ? "#fff" : "#545a63",
+          borderColor: on ? x.accent : "#e4e6ea",
+        };
+      }),
+    };
+
+    if (isVertical) {
+      out.v = {
+        accent: v.accent, accentDark: v.accentDark, accentSoft: v.accentSoft,
+        tagline: v.tagline, heroTitle: v.heroTitle, heroSub: v.heroSub,
+        heroImg: IMG[v.heroImage].src, heroAlt: IMG[v.heroImage].alt,
+        servicesTitle: v.servicesTitle,
+        primaryLabel: v.primary.label,
+        primaryHref: v.primary.type === "wa" ? this.wa(`Halo GIP, saya ingin menanyakan ${v.name}.`) : "#form",
+        primaryTarget: v.primary.type === "wa" ? "_blank" : "_self",
+        secondaryLabel: v.secondary.label,
+        secondaryHref: v.secondary.href,
+        responseTime: v.responseTime,
+        formCta: v.primary.type === "wa" ? "Kirim lewat WhatsApp" : "Kirim permintaan",
+        hasPackages: v.packages.length > 0,
+        proofBg: v.packages.length > 0 ? "#ffffff" : "#f6f7f9",
+        services: v.services.map((s) => ({ title: s.title, desc: s.desc, icon: this.icon(s.icon, v.accentDark) })),
+        proof: v.proof,
+        packages: v.packages.map((p) => ({
+          name: p.name, desc: p.desc, items: p.items,
+          border: p.featured ? `2px solid ${v.accent}` : "1px solid #e4e6ea",
+          check: this.check(v.accent),
+        })),
+      };
+
+      const all = v.fields.concat([{ label: "Nama dan nomor yang bisa dihubungi", placeholder: "Budi, 0812 3456 7890" }]);
+      out.formFields = all.map((f, i) => ({
+        key: `f${i}`,
+        label: f.label,
+        placeholder: f.placeholder,
+        value: this.state.values[f.label] || "",
+        error: this.state.errors[f.label] || "",
+        borderColor: this.state.errors[f.label] ? "#c0392b" : "#e4e6ea",
+        onChange: (e) => {
+          const val = e.target.value;
+          this.setState((s) => ({
+            values: { ...s.values, [f.label]: val },
+            errors: { ...s.errors, [f.label]: undefined },
+          }));
+        },
+      }));
+      out.submitForm = this.submit;
+      out.sentNote = this.state.sent ? "Ringkasan permintaan sudah disiapkan di WhatsApp. Kalau jendelanya tidak terbuka, izinkan popup lalu coba lagi." : "";
+    }
+
+    return out;
+  }
+}
+</script>
+</body>
+</html>
