@@ -4,7 +4,10 @@ import { company, offices, verticalList } from "../../lib/content";
 
 export const metadata = {
   title: "Kontak",
-  description: "Hubungi PT Galactic Indonesia Perkasa untuk kebutuhan event, jaringan, dan konektivitas maritim.",
+  description:
+    "Hubungi PT Galactic Indonesia Perkasa untuk kebutuhan event, jaringan, dan konektivitas maritim. Kantor di Jakarta, Batam, dan Bandung.",
+  alternates: { canonical: "/kontak" },
+  openGraph: { title: "Kontak GIP", description: "WhatsApp, surel, dan kantor Jakarta, Batam, Bandung.", url: "/kontak" },
 };
 
 export default function Page() {

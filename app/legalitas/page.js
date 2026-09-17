@@ -4,7 +4,9 @@ import { company, offices } from "../../lib/content";
 export const metadata = {
   title: "Legalitas",
   description:
-    "Informasi badan hukum, klasifikasi usaha, dan posisi kepatuhan PT Galactic Indonesia Perkasa.",
+    "Informasi badan hukum dan posisi kepatuhan PT Galactic Indonesia Perkasa.",
+  alternates: { canonical: "/legalitas" },
+  robots: { index: false, follow: true },
 };
 
 const rows = [

@@ -71,7 +71,7 @@ export default function Home() {
                 <p className="eyebrow">Partner teknologi</p>
                 <div className="logo-row">
                   {partners.map((p) => (
-                    <img className="logo-row-item" key={p.name} src={p.src} alt={p.name} />
+                    <img className="logo-row-item" key={p.name} src={p.src} alt={p.name} style={{ maxWidth: p.maxWidth }} />
                   ))}
                 </div>
               </div>

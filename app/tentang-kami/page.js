@@ -5,7 +5,9 @@ import { company, images, stats } from "../../lib/content";
 export const metadata = {
   title: "Tentang kami",
   description:
-    "PT Galactic Indonesia Perkasa membangun dan mengoperasikan infrastruktur teknis untuk event, korporasi, dan sektor maritim.",
+    "PT Galactic Indonesia Perkasa membangun dan mengoperasikan infrastruktur teknis untuk event, korporasi, dan sektor maritim. Kantor di Jakarta, Batam, dan Bandung.",
+  alternates: { canonical: "/tentang-kami" },
+  openGraph: { title: "Tentang GIP", description: "Satu kompetensi, tiga medan yang berbeda.", url: "/tentang-kami" },
 };
 
 export default function Page() {

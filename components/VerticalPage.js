@@ -4,6 +4,23 @@ import { images } from "../lib/content";
 
 export default function VerticalPage({ v }) {
   const heroImg = images[v.heroImage];
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: v.name,
+    serviceType: v.tagline,
+    description: v.heroSub,
+    provider: { "@type": "Organization", name: "PT Galactic Indonesia Perkasa", url: "https://gip.co.id" },
+    areaServed: v.slug === "marine" ? "Worldwide" : "ID",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: v.servicesTitle,
+      itemListElement: v.services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.desc },
+      })),
+    },
+  };
   const style = {
     "--accent": v.accent,
     "--accent-dark": v.accentDark,
@@ -130,6 +147,7 @@ export default function VerticalPage({ v }) {
       </main>
 
       <Footer />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
     </div>
   );
 }

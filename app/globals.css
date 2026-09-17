@@ -102,6 +102,7 @@ p {
 .btn {
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
   gap: 8px;
   padding: 13px 24px;
   border-radius: var(--radius);
@@ -191,6 +192,7 @@ p {
 
 .nav a {
   color: var(--ink-soft);
+  white-space: nowrap;
 }
 
 .nav a:hover {
@@ -538,17 +540,18 @@ p {
 }
 
 .logo-row-item {
-  height: 26px;
+  max-height: 30px;
+  /* Fortinet dan wordmark ekstrem lebar diberi cap sendiri lewat inline style di page.js */
+  max-width: 118px;
   width: auto;
-  max-width: 140px;
+  height: auto;
   object-fit: contain;
   filter: grayscale(1);
-  opacity: 0.7;
+  opacity: 0.68;
 }
 
 .logo-row-item.is-client {
-  height: 30px;
-  max-width: 130px;
+  max-height: 42px;
 }
 
 /* Footer offices */
