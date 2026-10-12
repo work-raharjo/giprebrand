@@ -21,36 +21,57 @@ Vercel mendeteksi Next.js secara otomatis. Impor repositori ini, biarkan seluruh
 
 ```
 app/
-  page.js            Homepage, audience splitter tiga lini
+  page.js            Beranda bahasa Indonesia
   event/             Hub gip.event
-  connect/           Hub gip.connect
+  network/           Hub gip.network
   marine/            Hub gip.marine
   tentang-kami/      Halaman perusahaan
   legalitas/         Identitas badan hukum dan posisi kepatuhan
   kontak/            Jalur kontak dan pengarah formulir
+  en/                Seluruh halaman versi bahasa Inggris
+    page.js, event/, network/, marine/, about/, legal/, contact/
+  layout.js          Metadata global dan schema Organization
+  sitemap.js         Sitemap kedua bahasa, lengkap dengan anotasi alternates
   globals.css        Seluruh styling dan design token
 components/
-  Chrome.js          Header, footer, ikon, logo mark, helper WhatsApp
-  VerticalPage.js    Template halaman hub, dipakai ketiga lini
+  Chrome.js          Header, footer, pengalih bahasa, ikon, helper WhatsApp
+  VerticalPage.js    Template halaman hub, dipakai ketiga lini di kedua bahasa
   LeadForm.js        Formulir dengan validasi, mengirim ke WhatsApp
+  StickyChat.js      Tombol WhatsApp melayang
+  HtmlLang.js        Menyetel atribut lang pada <html> di sisi klien
+  pages/             Isi halaman bersama: Home, About, Legal, Contact
 lib/
-  content.js         Seluruh teks, warna aksen, data gambar, partner, klien, kantor
+  content.js         Data tanpa bahasa: gambar, perusahaan, kantor, partner, klien, warna aksen
+  strings.js         Seluruh teks Indonesia dan Inggris
+  i18n.js            Resolusi bahasa, pembentuk tautan, dan metadata per halaman
 public/
   gip-mark.jpg       Logo GIP
   partners/          Logo partner teknologi
   clients/           Logo klien
 ```
 
+## Dua bahasa
+
+Bahasa Indonesia berada di akar (`/`, `/event`, `/kontak`). Bahasa Inggris memakai awalan `/en` dengan slug yang disesuaikan (`/en`, `/en/event`, `/en/contact`). Kedua versi dirender statis, bukan diterjemahkan di sisi klien, sehingga keduanya bisa diindeks mesin pencari.
+
+Tombol pengalih berada di kanan header dalam bentuk pil dua segmen. Tombol itu menautkan ke halaman setara di bahasa lain, bukan ke beranda, jadi pembaca tidak kehilangan posisinya.
+
+Menambah atau mengubah teks dilakukan di `lib/strings.js`. Berkas itu berisi dua objek dengan struktur identik, `id` dan `en`. Menambah kunci hanya di salah satu bahasa akan membuat teks hilang di bahasa yang lain, jadi selalu ubah keduanya.
+
+Pemetaan rute berada di `strings.<bahasa>.routes`. Seluruh tautan internal memanggil `href(lang, key)` dari `lib/i18n.js`, bukan menulis path literal, supaya awalan dan slug tetap konsisten.
+
+Halaman legalitas disetel `noindex` di kedua bahasa dan tidak dimasukkan ke sitemap sampai ditinjau penasihat hukum.
+
 ## Mengubah isi
 
-Hampir seluruh teks berada di `lib/content.js`. Menambah layanan, mengubah paket, mengganti warna aksen, atau menyesuaikan field formulir cukup dilakukan di berkas tersebut tanpa menyentuh komponen.
+Teks berada di `lib/strings.js`. Warna aksen, logo partner, logo klien, alamat kantor, dan data gambar berada di `lib/content.js`.
 
 Warna aksen per lini:
 
 | Lini | Aksen |
 | --- | --- |
 | gip.event | `#D85A30` |
-| gip.connect | `#7F77DD` |
+| gip.network | `#7F77DD` |
 | gip.marine | `#1D9E75` |
 
 Warna aksen induk tetap navy `#1c3f94`. Warna cyan pada logo tidak dipakai sebagai warna aksen.

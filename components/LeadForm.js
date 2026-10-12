@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { waLink } from "./Chrome";
 
-export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
+export default function LeadForm({ fields, note, ctaLabel, verticalName, copy }) {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
@@ -16,15 +16,15 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
   const submit = () => {
     const next = {};
     fields.forEach((f) => {
-      if (!values[f.label] || !values[f.label].trim()) next[f.label] = "Wajib diisi";
+      if (!values[f.label] || !values[f.label].trim()) next[f.label] = copy.required;
     });
-    if (!values.kontak || !values.kontak.trim()) next.kontak = "Wajib diisi";
+    if (!values.contact || !values.contact.trim()) next.contact = copy.required;
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
     const lines = fields.map((f) => `${f.label}: ${values[f.label]}`);
-    lines.push(`Kontak: ${values.kontak}`);
-    const message = `Halo GIP, saya ingin menanyakan ${verticalName}.\n\n${lines.join("\n")}`;
+    lines.push(`${copy.contactKey}: ${values.contact}`);
+    const message = `${copy.greetingLine}\n\n${lines.join("\n")}`;
     window.open(waLink(message), "_blank", "noopener");
     setSent(true);
   };
@@ -47,16 +47,16 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
           </div>
         ))}
         <div className="field">
-          <label htmlFor="kontak">Nama dan nomor yang bisa dihubungi</label>
+          <label htmlFor="contact">{copy.contactLabel}</label>
           <input
-            id="kontak"
+            id="contact"
             type="text"
-            className={errors.kontak ? "is-error" : ""}
-            placeholder="Budi, 0812 3456 7890"
-            value={values.kontak || ""}
-            onChange={(e) => set("kontak", e.target.value)}
+            className={errors.contact ? "is-error" : ""}
+            placeholder={copy.contactPlaceholder}
+            value={values.contact || ""}
+            onChange={(e) => set("contact", e.target.value)}
           />
-          <div className="form-error">{errors.kontak || ""}</div>
+          <div className="form-error">{errors.contact || ""}</div>
         </div>
       </div>
 
@@ -69,8 +69,7 @@ export default function LeadForm({ fields, note, ctaLabel, verticalName }) {
 
       {sent ? (
         <p className="form-status" style={{ color: "var(--accent-dark)" }}>
-          Ringkasan permintaan sudah disiapkan di WhatsApp. Kalau jendelanya tidak terbuka, izinkan popup lalu coba
-          lagi.
+          {copy.sent}
         </p>
       ) : null}
     </div>

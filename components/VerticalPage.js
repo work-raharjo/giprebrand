@@ -1,26 +1,33 @@
 import { Header, Footer, Icon, Check, waLink } from "./Chrome";
 import LeadForm from "./LeadForm";
-import { images } from "../lib/content";
+import HtmlLang from "./HtmlLang";
+import StickyChat from "./StickyChat";
+import { SITE, img, t, vertical as getVertical } from "../lib/i18n";
 
-export default function VerticalPage({ v }) {
-  const heroImg = images[v.heroImage];
+export default function VerticalPage({ lang = "id", route }) {
+  const s = t(lang);
+  const v = getVertical(lang, route);
+  const heroImg = img(lang, v.heroImage);
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: v.name,
     serviceType: v.tagline,
     description: v.heroSub,
-    provider: { "@type": "Organization", name: "PT Galactic Indonesia Perkasa", url: "https://gip.co.id" },
-    areaServed: v.slug === "marine" ? "Worldwide" : "ID",
+    inLanguage: s.htmlLang,
+    provider: { "@type": "Organization", name: "PT Galactic Indonesia Perkasa", url: SITE },
+    areaServed: v.areaServed,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: v.servicesTitle,
-      itemListElement: v.services.map((s) => ({
+      itemListElement: v.services.map((item) => ({
         "@type": "Offer",
-        itemOffered: { "@type": "Service", name: s.title, description: s.desc },
+        itemOffered: { "@type": "Service", name: item.title, description: item.desc },
       })),
     },
   };
+
   const style = {
     "--accent": v.accent,
     "--accent-dark": v.accentDark,
@@ -29,7 +36,8 @@ export default function VerticalPage({ v }) {
 
   return (
     <div style={style}>
-      <Header vertical={v} />
+      <HtmlLang lang={lang} />
+      <Header lang={lang} route={route} vertical={v} />
 
       <main id="konten">
         <section className="vhero">
@@ -42,22 +50,22 @@ export default function VerticalPage({ v }) {
               <h1>{v.heroTitle}</h1>
               <p className="lede">{v.heroSub}</p>
               <div className="hero-actions">
-                {v.ctaPrimary.type === "wa" ? (
+                {v.ctaPrimaryType === "wa" ? (
                   <a
                     className="btn btn-solid"
-                    href={waLink(`Halo GIP, saya ingin menanyakan ${v.name}.`)}
+                    href={waLink(s.form.greeting(v.name))}
                     target="_blank"
                     rel="noopener"
                   >
-                    {v.ctaPrimary.label}
+                    {v.ctaPrimary}
                   </a>
                 ) : (
                   <a className="btn btn-solid" href="#form">
-                    {v.ctaPrimary.label}
+                    {v.ctaPrimary}
                   </a>
                 )}
-                <a className="btn btn-outline" href={v.ctaSecondary.href}>
-                  {v.ctaSecondary.label}
+                <a className="btn btn-outline" href={v.ctaSecondaryHref}>
+                  {v.ctaSecondary}
                 </a>
               </div>
             </div>
@@ -69,16 +77,16 @@ export default function VerticalPage({ v }) {
 
         <section className="section" id="layanan">
           <div className="wrap">
-            <p className="eyebrow">Lingkup layanan</p>
+            <p className="eyebrow">{s.verticalUi.scopeEyebrow}</p>
             <h2>{v.servicesTitle}</h2>
             <div className="grid grid-4" style={{ marginTop: 32 }}>
-              {v.services.map((s) => (
-                <div className="card" key={s.title}>
+              {v.services.map((item) => (
+                <div className="card" key={item.title}>
                   <div className="card-icon">
-                    <Icon name={s.icon} />
+                    <Icon name={item.icon} />
                   </div>
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -88,8 +96,8 @@ export default function VerticalPage({ v }) {
         {v.packages.length > 0 ? (
           <section className="section section-alt">
             <div className="wrap">
-              <p className="eyebrow">Paket</p>
-              <h2>Tiga tingkat, lingkupnya tertulis</h2>
+              <p className="eyebrow">{s.verticalUi.packagesEyebrow}</p>
+              <h2>{s.verticalUi.packagesTitle}</h2>
               <div className="grid grid-3" style={{ marginTop: 32 }}>
                 {v.packages.map((p) => (
                   <div className={`card ${p.featured ? "card-featured" : ""}`} key={p.name}>
@@ -107,8 +115,7 @@ export default function VerticalPage({ v }) {
                 ))}
               </div>
               <p className="form-note" style={{ marginTop: 20 }}>
-                Harga menyesuaikan durasi, venue, dan hasil site survey. Penawaran tertulis kami kirim setelah
-                lingkup dikunci.
+                {s.verticalUi.priceNote}
               </p>
             </div>
           </section>
@@ -116,8 +123,8 @@ export default function VerticalPage({ v }) {
 
         <section className={`section ${v.packages.length > 0 ? "" : "section-alt"}`} id="bukti">
           <div className="wrap">
-            <p className="eyebrow">Bukti dan jaminan</p>
-            <h2>Yang bisa Anda periksa sebelum memutuskan</h2>
+            <p className="eyebrow">{s.verticalUi.proofEyebrow}</p>
+            <h2>{s.verticalUi.proofTitle}</h2>
             <div className="grid grid-3" style={{ marginTop: 32 }}>
               {v.proof.map((p) => (
                 <div className="card" key={p.title}>
@@ -131,22 +138,31 @@ export default function VerticalPage({ v }) {
 
         <section className="section section-alt" id="form">
           <div className="wrap" style={{ maxWidth: 760 }}>
-            <p className="eyebrow">Mulai percakapan</p>
-            <h2>Kirim kebutuhan Anda</h2>
+            <p className="eyebrow">{s.verticalUi.formEyebrow}</p>
+            <h2>{s.verticalUi.formTitle}</h2>
             <p className="lede" style={{ marginTop: 12, marginBottom: 28 }}>
-              Isi ringkas saja. Detail teknisnya kami lengkapi lewat telepon.
+              {s.verticalUi.formLede}
             </p>
             <LeadForm
               fields={v.formFields}
               note={v.responseTime}
-              ctaLabel={v.ctaPrimary.type === "wa" ? "Kirim lewat WhatsApp" : "Kirim permintaan"}
+              ctaLabel={v.ctaPrimaryType === "wa" ? s.form.sendWa : s.form.sendRequest}
               verticalName={v.name}
+              copy={{
+                required: s.form.required,
+                contactLabel: s.form.contactLabel,
+                contactPlaceholder: s.form.contactPlaceholder,
+                contactKey: s.form.contactKey,
+                sent: s.form.sent,
+                greetingLine: s.form.greeting(v.name),
+              }}
             />
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer lang={lang} />
+      <StickyChat lang={lang} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
     </div>
   );

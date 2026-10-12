@@ -821,6 +821,54 @@ p {
   color: #fff;
 }
 
+/* Pengalih bahasa.
+   Dibuat sebagai pil dua segmen, bukan dropdown, supaya bahasa yang sedang
+   aktif dan bahasa alternatif terbaca sekaligus tanpa klik. */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.lang-current,
+.lang-alt {
+  padding: 7px 11px;
+  display: block;
+}
+
+.lang-current {
+  background: var(--ink);
+  color: #fff;
+}
+
+.lang-alt {
+  color: var(--ink-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lang-alt:hover {
+  background: var(--surface-alt);
+  color: var(--ink);
+}
+
+.lang-alt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 @media (max-width: 860px) {
   .story,
   .vhero-grid {
@@ -856,6 +904,11 @@ p {
     padding-bottom: 10px;
     flex-wrap: wrap;
     gap: 12px 20px;
+  }
+  .header-right {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
   .vswitch {
     flex-wrap: wrap;

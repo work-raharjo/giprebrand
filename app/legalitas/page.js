@@ -1,58 +1,8 @@
-import { Header, Footer } from "../../components/Chrome";
-import { company, offices } from "../../lib/content";
+import Legal from "../../components/pages/Legal";
+import { pageMetadata } from "../../lib/i18n";
 
-export const metadata = {
-  title: "Legalitas",
-  description:
-    "Informasi badan hukum dan posisi kepatuhan PT Galactic Indonesia Perkasa.",
-  alternates: { canonical: "/legalitas" },
-  robots: { index: false, follow: true },
-};
-
-const rows = [
-  ["Nama badan hukum", company.name],
-  ["Alamat terdaftar", offices[2].addr],
-];
+export const metadata = pageMetadata("id", "legal");
 
 export default function Page() {
-  return (
-    <>
-      <Header />
-      <main>
-        <section className="section">
-          <div className="wrap" style={{ maxWidth: 820 }}>
-            <p className="eyebrow">Legalitas dan kepatuhan</p>
-            <h1>Dokumen yang biasa diminta procurement</h1>
-            <p className="lede" style={{ marginTop: 18 }}>
-              Halaman ini merangkum identitas badan hukum dan posisi kepatuhan kami. Salinan dokumen lengkap
-              tersedia atas permintaan untuk keperluan vendor registration.
-            </p>
-
-            <div className="form-card" style={{ marginTop: 32, padding: 0, overflow: "hidden" }}>
-              <table className="table">
-                <tbody>
-                  {rows.map(([k, v]) => (
-                    <tr key={k}>
-                      <th style={{ width: "34%" }}>{k}</th>
-                      <td>{v}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Peninjauan penasihat hukum wajib dilakukan sebelum halaman ini dipublikasikan. */}
-            <h2 style={{ marginTop: 48 }}>Posisi terhadap lisensi telekomunikasi</h2>
-            <p className="lede" style={{ marginTop: 14 }}>
-              GIP beroperasi sebagai penyedia layanan terkelola dan penjual kembali jasa telekomunikasi. Kapasitas
-              upstream disediakan mitra pemegang lisensi penyelenggaraan telekomunikasi, dan kewajiban yang melekat
-              pada lisensi tersebut berada pada pemegang lisensi. GIP bertanggung jawab atas perangkat di lokasi
-              pelanggan, konfigurasi, pemantauan, dan dukungan operasional.
-            </p>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+  return <Legal lang="id" />;
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { company, offices, verticalList } from "../lib/content";
+import { company, offices } from "../lib/content";
+import { href, other, t, verticalsFor } from "../lib/i18n";
 
 const PATHS = {
   wifi: "M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0M12 19h.01",
@@ -50,11 +51,31 @@ export function waLink(text) {
   return `https://wa.me/${company.waNumber}?text=${encodeURIComponent(text)}`;
 }
 
-export function Header({ vertical }) {
+// Pengalih bahasa. Menautkan ke halaman setara di bahasa lain, bukan ke beranda,
+// supaya pembaca tidak kehilangan posisinya saat berpindah bahasa.
+export function LangToggle({ lang, route }) {
+  const alt = other(lang);
+
+  return (
+    <div className="lang-toggle" role="group" aria-label={lang === "id" ? "Pilih bahasa" : "Choose language"}>
+      <span className="lang-current" aria-current="true">
+        {t(lang).shortLabel}
+      </span>
+      <Link href={href(alt, route)} className="lang-alt" hrefLang={t(alt).htmlLang} title={t(lang).switchTo}>
+        {t(alt).shortLabel}
+      </Link>
+    </div>
+  );
+}
+
+export function Header({ lang = "id", route = "home", vertical }) {
+  const s = t(lang);
+  const lines = verticalsFor(lang);
+
   return (
     <header className="site-header">
       <div className="wrap header-inner">
-        <Link href="/" className="logo">
+        <Link href={href(lang, "home")} className="logo">
           <LogoMark />
           <span>
             {company.domain}
@@ -62,35 +83,42 @@ export function Header({ vertical }) {
           </span>
         </Link>
 
-        {vertical ? (
-          <nav className="vswitch" aria-label="Pilih lini layanan">
-            {verticalList.map((v) => (
-              <Link key={v.slug} href={`/${v.slug}`} className={v.slug === vertical.slug ? "on" : ""}>
-                {v.name}
+        <div className="header-right">
+          {vertical ? (
+            <nav className="vswitch" aria-label={s.nav.lineLabel}>
+              {lines.map((v) => (
+                <Link key={v.slug} href={href(lang, v.key)} className={v.slug === vertical.slug ? "on" : ""}>
+                  {v.name}
+                </Link>
+              ))}
+            </nav>
+          ) : (
+            <nav className="nav" aria-label={s.nav.mainLabel}>
+              {lines.map((v) => (
+                <Link key={v.slug} href={href(lang, v.key)} className="nav-hide">
+                  {v.name}
+                </Link>
+              ))}
+              <Link href={href(lang, "about")} className="nav-hide">
+                {s.nav.about}
               </Link>
-            ))}
-          </nav>
-        ) : (
-          <nav className="nav" aria-label="Navigasi utama">
-            {verticalList.map((v) => (
-              <Link key={v.slug} href={`/${v.slug}`} className="nav-hide">
-                {v.name}
+              <Link href={href(lang, "contact")} className="nav-cta">
+                {s.nav.contact}
               </Link>
-            ))}
-            <Link href="/tentang-kami" className="nav-hide">
-              Tentang
-            </Link>
-            <Link href="/kontak" className="nav-cta">
-              Hubungi kami
-            </Link>
-          </nav>
-        )}
+            </nav>
+          )}
+
+          <LangToggle lang={lang} route={route} />
+        </div>
       </div>
     </header>
   );
 }
 
-export function Footer() {
+export function Footer({ lang = "id" }) {
+  const s = t(lang);
+  const lines = verticalsFor(lang);
+
   return (
     <footer className="site-footer">
       <div className="wrap">
@@ -100,39 +128,37 @@ export function Footer() {
               <LogoMark />
               <span>{company.domain}</span>
             </div>
-            <p style={{ color: "var(--ink-soft)", maxWidth: "34ch" }}>
-              Pasang, jalankan, dan jaga infrastruktur teknis di lapangan.
-            </p>
+            <p style={{ color: "var(--ink-soft)", maxWidth: "34ch" }}>{s.footer.blurb}</p>
           </div>
 
           <div>
-            <h4>Layanan</h4>
+            <h4>{s.footer.services}</h4>
             <ul>
-              {verticalList.map((v) => (
+              {lines.map((v) => (
                 <li key={v.slug}>
-                  <Link href={`/${v.slug}`}>{v.name}</Link>
+                  <Link href={href(lang, v.key)}>{v.name}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4>Perusahaan</h4>
+            <h4>{s.footer.company}</h4>
             <ul>
               <li>
-                <Link href="/tentang-kami">Tentang kami</Link>
+                <Link href={href(lang, "about")}>{s.footer.about}</Link>
               </li>
               <li>
-                <Link href="/legalitas">Legalitas</Link>
+                <Link href={href(lang, "legal")}>{s.footer.legal}</Link>
               </li>
               <li>
-                <Link href="/kontak">Kontak</Link>
+                <Link href={href(lang, "contact")}>{s.footer.contactLink}</Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4>Kontak</h4>
+            <h4>{s.footer.contact}</h4>
             <ul>
               <li>
                 <a href={`mailto:${company.email}`}>{company.email}</a>
@@ -141,7 +167,7 @@ export function Footer() {
                 <a href={`tel:${company.phone}`}>{company.phone}</a>
               </li>
               <li>
-                <a href={waLink("Halo GIP, saya ingin berkonsultasi.")} target="_blank" rel="noopener">
+                <a href={waLink(s.form.generalGreeting)} target="_blank" rel="noopener">
                   WhatsApp
                 </a>
               </li>
@@ -150,7 +176,7 @@ export function Footer() {
         </div>
 
         <div className="footer-offices">
-          <h4>Kantor</h4>
+          <h4>{s.footer.offices}</h4>
           <div className="footer-offices-grid">
             {offices.map((o) => (
               <div key={o.city}>
@@ -163,7 +189,7 @@ export function Footer() {
 
         <div className="footer-bottom">
           <span>
-            &copy; {new Date().getFullYear()} {company.name}. Seluruh hak dilindungi.
+            &copy; {new Date().getFullYear()} {company.name}. {s.footer.rights}
           </span>
         </div>
       </div>
